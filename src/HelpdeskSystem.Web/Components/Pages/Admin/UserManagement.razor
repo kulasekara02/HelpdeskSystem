@@ -64,7 +64,6 @@ else
         </div>
     </div>
 
-    <!-- Edit Roles Modal -->
     @if (_selectedUser != null)
     {
         <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
@@ -78,7 +77,7 @@ else
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="roleAdmin"
                                    checked="@_selectedRoles.Contains("Admin")"
-                                   @onchange="e => ToggleRole(\"Admin\", (bool)e.Value!)" />
+                                   @onchange="e => ToggleRole_Admin((bool)(e.Value ?? false))" />
                             <label class="form-check-label" for="roleAdmin">
                                 <span class="badge bg-danger">Admin</span>
                                 <small class="text-muted ms-2">Full system access</small>
@@ -87,7 +86,7 @@ else
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="roleAgent"
                                    checked="@_selectedRoles.Contains("Agent")"
-                                   @onchange="e => ToggleRole(\"Agent\", (bool)e.Value!)" />
+                                   @onchange="e => ToggleRole_Agent((bool)(e.Value ?? false))" />
                             <label class="form-check-label" for="roleAgent">
                                 <span class="badge bg-primary">Agent</span>
                                 <small class="text-muted ms-2">Can manage tickets</small>
@@ -96,7 +95,7 @@ else
                         <div class="form-check mb-2">
                             <input type="checkbox" class="form-check-input" id="roleUser"
                                    checked="@_selectedRoles.Contains("User")"
-                                   @onchange="e => ToggleRole(\"User\", (bool)e.Value!)" />
+                                   @onchange="e => ToggleRole_User((bool)(e.Value ?? false))" />
                             <label class="form-check-label" for="roleUser">
                                 <span class="badge bg-secondary">User</span>
                                 <small class="text-muted ms-2">Can create and view tickets</small>
@@ -150,12 +149,22 @@ else
         _selectedRoles.Clear();
     }
 
-    private void ToggleRole(string role, bool isChecked)
+    private void ToggleRole_Admin(bool isChecked)
     {
-        if (isChecked)
-            _selectedRoles.Add(role);
-        else
-            _selectedRoles.Remove(role);
+        if (isChecked) _selectedRoles.Add("Admin");
+        else _selectedRoles.Remove("Admin");
+    }
+
+    private void ToggleRole_Agent(bool isChecked)
+    {
+        if (isChecked) _selectedRoles.Add("Agent");
+        else _selectedRoles.Remove("Agent");
+    }
+
+    private void ToggleRole_User(bool isChecked)
+    {
+        if (isChecked) _selectedRoles.Add("User");
+        else _selectedRoles.Remove("User");
     }
 
     private async Task SaveRolesAsync()

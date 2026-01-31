@@ -1,0 +1,16 @@
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\bin\Debug\net8.0\HelpdeskSystem.Application.deps.json
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\bin\Debug\net8.0\HelpdeskSystem.Application.dll
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\bin\Debug\net8.0\HelpdeskSystem.Application.pdb
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\bin\Debug\net8.0\HelpdeskSystem.Domain.dll
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\bin\Debug\net8.0\HelpdeskSystem.Domain.pdb
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.csproj.AssemblyReference.cache
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.AssemblyInfoInputs.cache
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.AssemblyInfo.cs
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.csproj.CoreCompileInputs.cache
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.sourcelink.json
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\Helpdesk.54084256.Up2Date
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.dll
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\refint\HelpdeskSystem.Application.dll
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\HelpdeskSystem.Application.pdb
+C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem\src\HelpdeskSystem.Application\obj\Debug\net8.0\ref\HelpdeskSystem.Application.dll

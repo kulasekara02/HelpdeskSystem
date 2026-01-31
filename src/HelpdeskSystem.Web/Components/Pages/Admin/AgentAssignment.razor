@@ -62,7 +62,7 @@ else
                                     <td>
                                         <div class="d-flex gap-2">
                                             <select class="form-select form-select-sm" style="width: auto;"
-                                                    @bind="@_selectedAgentIds[ticket.Id]">
+                                                    @bind="_selectedAgentIds[ticket.Id]">
                                                 <option value="">Select agent...</option>
                                                 @foreach (var agent in _agents)
                                                 {
@@ -95,19 +95,14 @@ else
                         {
                             var workload = _agentWorkload.GetValueOrDefault(agent.Id, 0);
                             var progressWidth = Math.Min(workload * 10, 100);
-                            var colorClass = workload switch
-                            {
-                                < 3 => "success",
-                                < 6 => "warning",
-                                _ => "danger"
-                            };
+                            var colorClass = workload < 3 ? "success" : workload < 6 ? "warning" : "danger";
                             <li class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="fw-semibold">@agent.FullName</span>
                                     <span class="badge bg-@colorClass">@workload tickets</span>
                                 </div>
                                 <div class="progress" style="height: 6px;">
-                                    <div class="progress-bar bg-@colorClass" style="width: @progressWidth%"></div>
+                                    <div class="progress-bar bg-@colorClass" style="width: @(progressWidth)%"></div>
                                 </div>
                             </li>
                         }
@@ -180,7 +175,6 @@ else
             _successMessage = "Agent assigned successfully!";
             await LoadDataAsync();
 
-            // Clear message after 3 seconds
             _ = Task.Run(async () =>
             {
                 await Task.Delay(3000);

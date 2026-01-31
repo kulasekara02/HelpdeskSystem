@@ -69,20 +69,19 @@ else
                             </div>
                         </div>
 
-                        <AuthorizeView Roles="Admin,Agent">
-                            <Authorized>
-                                <div class="mb-4">
-                                    <label class="form-label fw-semibold">Assigned Agent</label>
-                                    <InputSelect @bind-Value="_model.AssignedAgentId" class="form-select">
-                                        <option value="">-- Unassigned --</option>
-                                        @foreach (var agent in _agents)
-                                        {
-                                            <option value="@agent.Id">@agent.FullName</option>
-                                        }
-                                    </InputSelect>
-                                </div>
-                            </Authorized>
-                        </AuthorizeView>
+                        @if (_isAdminOrAgent)
+                        {
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Assigned Agent</label>
+                                <InputSelect @bind-Value="_model.AssignedAgentId" class="form-select">
+                                    <option value="">-- Unassigned --</option>
+                                    @foreach (var agent in _agents)
+                                    {
+                                        <option value="@agent.Id">@agent.FullName</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                        }
 
                         @if (!string.IsNullOrEmpty(_errorMessage))
                         {
@@ -117,10 +116,14 @@ else
     private List<UserDto> _agents = new();
     private bool _isLoading = true;
     private bool _isSubmitting = false;
+    private bool _isAdminOrAgent = false;
     private string? _errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        _isAdminOrAgent = authState.User.IsInRole("Admin") || authState.User.IsInRole("Agent");
+
         _agents = await UserService.GetAgentsAsync();
 
         var ticket = await TicketService.GetTicketByIdAsync(Id);

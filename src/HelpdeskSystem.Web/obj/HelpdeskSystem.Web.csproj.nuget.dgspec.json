@@ -1,0 +1,339 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Web\\HelpdeskSystem.Web.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\HelpdeskSystem.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\HelpdeskSystem.Application.csproj",
+        "projectName": "HelpdeskSystem.Application",
+        "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\HelpdeskSystem.Application.csproj",
+        "packagesPath": "C:\\Users\\kule9\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kule9\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\HelpdeskSystem.Domain.csproj": {
+                "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\HelpdeskSystem.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\HelpdeskSystem.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\HelpdeskSystem.Domain.csproj",
+        "projectName": "HelpdeskSystem.Domain",
+        "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\HelpdeskSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\kule9\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kule9\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Infrastructure\\HelpdeskSystem.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Infrastructure\\HelpdeskSystem.Infrastructure.csproj",
+        "projectName": "HelpdeskSystem.Infrastructure",
+        "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Infrastructure\\HelpdeskSystem.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\kule9\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kule9\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\HelpdeskSystem.Application.csproj": {
+                "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\HelpdeskSystem.Application.csproj"
+              },
+              "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\HelpdeskSystem.Domain.csproj": {
+                "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Domain\\HelpdeskSystem.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.28, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Oracle.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.21.121, )"
+            },
+            "Oracle.ManagedDataAccess.Core": {
+              "target": "Package",
+              "version": "[3.21.130, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Web\\HelpdeskSystem.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Web\\HelpdeskSystem.Web.csproj",
+        "projectName": "HelpdeskSystem.Web",
+        "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Web\\HelpdeskSystem.Web.csproj",
+        "packagesPath": "C:\\Users\\kule9\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kule9\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\HelpdeskSystem.Application.csproj": {
+                "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Application\\HelpdeskSystem.Application.csproj"
+              },
+              "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Infrastructure\\HelpdeskSystem.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\kule9\\OneDrive\\Desktop\\HelpdeskSystem\\src\\HelpdeskSystem.Infrastructure\\HelpdeskSystem.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "Microsoft.AspNetCore.Components.QuickGrid": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

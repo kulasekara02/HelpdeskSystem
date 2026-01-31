@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\HelpdeskSystem.Web.props" />
+</Project>

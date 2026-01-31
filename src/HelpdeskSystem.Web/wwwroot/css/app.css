@@ -1,0 +1,270 @@
+/* Helpdesk System Styles */
+
+html, body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main content area */
+.content {
+    padding-top: 1.5rem;
+}
+
+/* Card styling */
+.card {
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Table styling */
+.table th {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6c757d;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Badge styling */
+.badge {
+    font-weight: 500;
+    padding: 0.4em 0.8em;
+}
+
+/* Button styling */
+.btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+/* KPI Cards */
+.card.bg-primary,
+.card.bg-success,
+.card.bg-warning,
+.card.bg-info,
+.card.bg-danger {
+    border-radius: 0.75rem;
+}
+
+.card.bg-primary .card-body,
+.card.bg-success .card-body,
+.card.bg-warning .card-body,
+.card.bg-info .card-body,
+.card.bg-danger .card-body {
+    padding: 1.5rem;
+}
+
+/* Form styling */
+.form-control:focus,
+.form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Sidebar styling */
+.sidebar {
+    background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+}
+
+/* Page title */
+h3 {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+/* Toast notifications */
+.toast-container {
+    z-index: 1050;
+}
+
+/* Progress bars */
+.progress {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    border-radius: 1rem;
+}
+
+/* Chart containers */
+canvas {
+    max-height: 300px;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0.5rem;
+}
+
+.breadcrumb-item a {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: #3b82f6;
+}
+
+/* Status badge colors */
+.badge.bg-warning {
+    color: #1f2937 !important;
+}
+
+/* Modal styling */
+.modal-content {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-footer {
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Login/Register pages */
+.card.shadow {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Alert styling */
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.alert-info {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+/* List group styling */
+.list-group-item {
+    border-color: #e5e7eb;
+}
+
+/* Pagination styling */
+.pagination .page-link {
+    border-color: #e5e7eb;
+    color: #374151;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+/* Input group styling */
+.input-group-text {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+    color: #6b7280;
+}
+
+/* Spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Top row styling */
+.top-row a {
+    color: #d1d5db !important;
+}
+
+.top-row a:hover {
+    color: white !important;
+}
+
+/* Empty state */
+.text-muted i.fs-1 {
+    opacity: 0.5;
+}
+
+/* Description text */
+pre, .description-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: inherit;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1rem;
+    }
+
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Status history timeline */
+.status-history-item::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 40px;
+    bottom: -20px;
+    width: 2px;
+    background-color: #e5e7eb;
+}
+
+.status-history-item:last-child::before {
+    display: none;
+}
+
+/* Quick filter chips */
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    background-color: #f3f4f6;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.filter-chip button {
+    background: none;
+    border: none;
+    padding: 0 0 0 0.5rem;
+    cursor: pointer;
+    color: #6b7280;
+}
+
+.filter-chip button:hover {
+    color: #dc2626;
+}
