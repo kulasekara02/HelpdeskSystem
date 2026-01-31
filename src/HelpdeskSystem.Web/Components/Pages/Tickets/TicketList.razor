@@ -1,0 +1,229 @@
+@page "/tickets"
+@attribute [Authorize]
+@inject ITicketService TicketService
+@inject IUserService UserService
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<PageTitle>Tickets - Helpdesk System</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0">
+        <i class="bi bi-ticket-detailed me-2"></i>Tickets
+    </h3>
+    <a href="tickets/create" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-2"></i>New Ticket
+    </a>
+</div>
+
+<!-- Filters -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Status</label>
+                <select class="form-select" @bind="_filter.Status" @bind:after="ApplyFiltersAsync">
+                    <option value="">All Statuses</option>
+                    @foreach (var status in Enum.GetValues<TicketStatus>())
+                    {
+                        <option value="@status">@status</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Priority</label>
+                <select class="form-select" @bind="_filter.Priority" @bind:after="ApplyFiltersAsync">
+                    <option value="">All Priorities</option>
+                    @foreach (var priority in Enum.GetValues<TicketPriority>())
+                    {
+                        <option value="@priority">@priority</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Agent</label>
+                <select class="form-select" @bind="_filter.AssignedAgentId" @bind:after="ApplyFiltersAsync">
+                    <option value="">All Agents</option>
+                    @foreach (var agent in _agents)
+                    {
+                        <option value="@agent.Id">@agent.FullName</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Search</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search tickets..."
+                           @bind="_filter.SearchTerm" @bind:event="oninput" @onkeyup="HandleSearchKeyUp" />
+                    <button class="btn btn-outline-secondary" type="button" @onclick="ApplyFiltersAsync">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row g-3 mt-2">
+            <div class="col-md-3">
+                <label class="form-label">From Date</label>
+                <input type="date" class="form-control" @bind="_filter.DateFrom" @bind:after="ApplyFiltersAsync" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">To Date</label>
+                <input type="date" class="form-control" @bind="_filter.DateTo" @bind:after="ApplyFiltersAsync" />
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <button class="btn btn-outline-secondary" @onclick="ClearFilters">
+                    <i class="bi bi-x-circle me-2"></i>Clear Filters
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (_isLoading)
+{
+    <div class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+else if (_pagedResult != null)
+{
+    <div class="card border-0 shadow-sm">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Created By</th>
+                        <th>Assigned To</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!_pagedResult.Items.Any())
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">
+                                <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                No tickets found
+                            </td>
+                        </tr>
+                    }
+                    @foreach (var ticket in _pagedResult.Items)
+                    {
+                        <tr class="align-middle">
+                            <td>
+                                <a href="tickets/@ticket.Id" class="text-decoration-none fw-semibold">
+                                    @ticket.Title
+                                </a>
+                                @if (ticket.CommentCount > 0)
+                                {
+                                    <span class="badge bg-secondary ms-1">
+                                        <i class="bi bi-chat-dots me-1"></i>@ticket.CommentCount
+                                    </span>
+                                }
+                            </td>
+                            <td><TicketStatusBadge Status="ticket.Status" /></td>
+                            <td><PriorityBadge Priority="ticket.Priority" /></td>
+                            <td>@ticket.CreatedByUserName</td>
+                            <td>@(ticket.AssignedAgentName ?? "-")</td>
+                            <td>@ticket.CreatedAt.ToString("MMM dd, yyyy")</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="tickets/@ticket.Id" class="btn btn-outline-primary" title="View">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="tickets/edit/@ticket.Id" class="btn btn-outline-secondary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @if (_pagedResult.TotalPages > 1)
+        {
+            <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                <small class="text-muted">
+                    Showing @((_filter.Page - 1) * _filter.PageSize + 1) to
+                    @Math.Min(_filter.Page * _filter.PageSize, _pagedResult.TotalCount)
+                    of @_pagedResult.TotalCount tickets
+                </small>
+                <nav>
+                    <ul class="pagination pagination-sm mb-0">
+                        <li class="page-item @(_pagedResult.HasPreviousPage ? "" : "disabled")">
+                            <button class="page-link" @onclick="() => GoToPageAsync(_filter.Page - 1)">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                        </li>
+                        @for (int i = 1; i <= _pagedResult.TotalPages; i++)
+                        {
+                            var pageNum = i;
+                            <li class="page-item @(_filter.Page == pageNum ? "active" : "")">
+                                <button class="page-link" @onclick="() => GoToPageAsync(pageNum)">@pageNum</button>
+                            </li>
+                        }
+                        <li class="page-item @(_pagedResult.HasNextPage ? "" : "disabled")">
+                            <button class="page-link" @onclick="() => GoToPageAsync(_filter.Page + 1)">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private PagedResultDto<TicketDto>? _pagedResult;
+    private List<UserDto> _agents = new();
+    private TicketFilterDto _filter = new() { PageSize = 10 };
+    private bool _isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _agents = await UserService.GetAgentsAsync();
+        await LoadTicketsAsync();
+    }
+
+    private async Task LoadTicketsAsync()
+    {
+        _isLoading = true;
+        _pagedResult = await TicketService.GetTicketsAsync(_filter);
+        _isLoading = false;
+    }
+
+    private async Task ApplyFiltersAsync()
+    {
+        _filter.Page = 1;
+        await LoadTicketsAsync();
+    }
+
+    private async Task ClearFilters()
+    {
+        _filter = new TicketFilterDto { PageSize = 10 };
+        await LoadTicketsAsync();
+    }
+
+    private async Task GoToPageAsync(int page)
+    {
+        _filter.Page = page;
+        await LoadTicketsAsync();
+    }
+
+    private async Task HandleSearchKeyUp(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await ApplyFiltersAsync();
+        }
+    }
+}

@@ -1,0 +1,192 @@
+@page "/admin/assign"
+@attribute [Authorize(Roles = "Admin,Agent")]
+@inject ITicketService TicketService
+@inject IUserService UserService
+@inject AuthenticationStateProvider AuthStateProvider
+@rendermode InteractiveServer
+
+<PageTitle>Agent Assignment - Helpdesk System</PageTitle>
+
+<h3 class="mb-4">
+    <i class="bi bi-person-plus me-2"></i>Agent Assignment
+</h3>
+
+@if (_isLoading)
+{
+    <div class="d-flex justify-content-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0">Unassigned Tickets</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Title</th>
+                                <th>Priority</th>
+                                <th>Created By</th>
+                                <th>Created</th>
+                                <th>Assign To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!_unassignedTickets.Any())
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center py-4 text-muted">
+                                        <i class="bi bi-check-circle fs-1 d-block mb-2 text-success"></i>
+                                        All tickets are assigned!
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var ticket in _unassignedTickets)
+                            {
+                                <tr class="align-middle">
+                                    <td>
+                                        <a href="tickets/@ticket.Id" class="text-decoration-none">
+                                            @ticket.Title
+                                        </a>
+                                    </td>
+                                    <td><PriorityBadge Priority="ticket.Priority" /></td>
+                                    <td>@ticket.CreatedByUserName</td>
+                                    <td>@ticket.CreatedAt.ToString("MMM dd")</td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <select class="form-select form-select-sm" style="width: auto;"
+                                                    @bind="@_selectedAgentIds[ticket.Id]">
+                                                <option value="">Select agent...</option>
+                                                @foreach (var agent in _agents)
+                                                {
+                                                    <option value="@agent.Id">@agent.FullName</option>
+                                                }
+                                            </select>
+                                            <button class="btn btn-sm btn-primary"
+                                                    @onclick="() => AssignAgentAsync(ticket.Id)"
+                                                    disabled="@string.IsNullOrEmpty(_selectedAgentIds.GetValueOrDefault(ticket.Id))">
+                                                <i class="bi bi-check"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0">Agent Workload</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var agent in _agents)
+                        {
+                            var workload = _agentWorkload.GetValueOrDefault(agent.Id, 0);
+                            var progressWidth = Math.Min(workload * 10, 100);
+                            var colorClass = workload switch
+                            {
+                                < 3 => "success",
+                                < 6 => "warning",
+                                _ => "danger"
+                            };
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="fw-semibold">@agent.FullName</span>
+                                    <span class="badge bg-@colorClass">@workload tickets</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar bg-@colorClass" style="width: @progressWidth%"></div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(_successMessage))
+{
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast show bg-success text-white">
+            <div class="toast-body">
+                <i class="bi bi-check-circle me-2"></i>@_successMessage
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<TicketDto> _unassignedTickets = new();
+    private List<UserDto> _agents = new();
+    private Dictionary<string, int> _agentWorkload = new();
+    private Dictionary<string, string> _selectedAgentIds = new();
+    private bool _isLoading = true;
+    private string? _successMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        _isLoading = true;
+
+        _agents = await UserService.GetAgentsAsync();
+
+        var filter = new TicketFilterDto { PageSize = 100 };
+        var result = await TicketService.GetTicketsAsync(filter);
+
+        _unassignedTickets = result.Items
+            .Where(t => string.IsNullOrEmpty(t.AssignedAgentId))
+            .ToList();
+
+        _agentWorkload = result.Items
+            .Where(t => !string.IsNullOrEmpty(t.AssignedAgentId) &&
+                       (t.Status == TicketStatus.Open || t.Status == TicketStatus.InProgress))
+            .GroupBy(t => t.AssignedAgentId!)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        _selectedAgentIds = _unassignedTickets.ToDictionary(t => t.Id, _ => string.Empty);
+
+        _isLoading = false;
+    }
+
+    private async Task AssignAgentAsync(string ticketId)
+    {
+        var agentId = _selectedAgentIds.GetValueOrDefault(ticketId);
+        if (string.IsNullOrEmpty(agentId)) return;
+
+        var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+        var userId = authState.User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            await TicketService.AssignAgentAsync(ticketId, agentId, userId);
+            _successMessage = "Agent assigned successfully!";
+            await LoadDataAsync();
+
+            // Clear message after 3 seconds
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(3000);
+                _successMessage = null;
+                await InvokeAsync(StateHasChanged);
+            });
+        }
+    }
+}

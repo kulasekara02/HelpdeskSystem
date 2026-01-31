@@ -1,0 +1,69 @@
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">
+            <i class="bi bi-headset me-2"></i>Helpdesk
+        </a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door me-2" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="dashboard">
+                        <span class="bi bi-graph-up me-2" aria-hidden="true"></span> Dashboard
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="tickets">
+                        <span class="bi bi-ticket-detailed me-2" aria-hidden="true"></span> Tickets
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="tickets/create">
+                        <span class="bi bi-plus-circle me-2" aria-hidden="true"></span> New Ticket
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Admin,Agent">
+            <Authorized>
+                <hr class="mx-3 my-2 border-secondary" />
+                <div class="nav-item px-3 text-secondary small">MANAGEMENT</div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Admin,Agent">
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="admin/assign">
+                        <span class="bi bi-person-plus me-2" aria-hidden="true"></span> Assign Agents
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Admin">
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="admin/users">
+                        <span class="bi bi-people me-2" aria-hidden="true"></span> User Management
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+    </nav>
+</div>
