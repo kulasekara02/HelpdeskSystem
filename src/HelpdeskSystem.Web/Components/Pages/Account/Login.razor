@@ -1,0 +1,74 @@
+@page "/Account/Login"
+@layout MainLayout
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject NavigationManager Navigation
+@inject ILogger<Login> Logger
+@using HelpdeskSystem.Domain.Entities
+@using Microsoft.AspNetCore.Identity
+
+<PageTitle>Login - Helpdesk System</PageTitle>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card border-0 shadow">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="bi bi-headset text-primary fs-1"></i>
+                    <h3 class="mt-2">Welcome Back</h3>
+                    <p class="text-muted">Sign in to continue to Helpdesk</p>
+                </div>
+
+                <form method="post" action="/Account/LoginPost">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="email" name="Email" class="form-control" placeholder="your@email.com" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" name="Password" class="form-control" placeholder="Your password" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="RememberMe" class="form-check-input" id="rememberMe" value="true" />
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+
+                    <input type="hidden" name="ReturnUrl" value="@ReturnUrl" />
+
+                    <button type="submit" class="btn btn-primary w-100 py-2">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                    </button>
+                </form>
+
+                <hr class="my-4" />
+
+                <p class="text-center mb-0">
+                    Don't have an account? <a href="Account/Register">Register here</a>
+                </p>
+
+                <!-- Demo credentials -->
+                <div class="alert alert-info mt-4 mb-0">
+                    <h6 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Demo Accounts</h6>
+                    <small>
+                        <strong>Admin:</strong> admin@helpdesk.com / Admin123!<br />
+                        <strong>Agent:</strong> agent1@helpdesk.com / Agent123!<br />
+                        <strong>User:</strong> user1@example.com / User123!
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    public string? ReturnUrl { get; set; }
+}

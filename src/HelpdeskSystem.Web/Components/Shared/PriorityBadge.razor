@@ -1,0 +1,26 @@
+@using HelpdeskSystem.Domain.Enums
+
+<span class="badge @GetBadgeClass()">
+    <i class="bi @GetIcon() me-1"></i>@Priority
+</span>
+
+@code {
+    [Parameter]
+    public TicketPriority Priority { get; set; }
+
+    private string GetBadgeClass() => Priority switch
+    {
+        TicketPriority.Low => "bg-success",
+        TicketPriority.Medium => "bg-warning text-dark",
+        TicketPriority.High => "bg-danger",
+        _ => "bg-secondary"
+    };
+
+    private string GetIcon() => Priority switch
+    {
+        TicketPriority.Low => "bi-arrow-down",
+        TicketPriority.Medium => "bi-dash",
+        TicketPriority.High => "bi-arrow-up",
+        _ => "bi-circle"
+    };
+}

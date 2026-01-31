@@ -1,0 +1,17 @@
+@using HelpdeskSystem.Domain.Enums
+
+<span class="badge @GetBadgeClass()">@Status</span>
+
+@code {
+    [Parameter]
+    public TicketStatus Status { get; set; }
+
+    private string GetBadgeClass() => Status switch
+    {
+        TicketStatus.Open => "bg-warning text-dark",
+        TicketStatus.InProgress => "bg-info",
+        TicketStatus.Resolved => "bg-success",
+        TicketStatus.Closed => "bg-secondary",
+        _ => "bg-primary"
+    };
+}
