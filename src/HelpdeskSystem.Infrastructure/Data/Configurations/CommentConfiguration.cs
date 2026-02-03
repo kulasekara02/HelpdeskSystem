@@ -8,33 +8,24 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
     public void Configure(EntityTypeBuilder<Comment> builder)
     {
-        builder.ToTable("COMMENTS");
+        builder.ToTable("Comments");
 
         builder.HasKey(c => c.Id);
 
         builder.Property(c => c.Id)
-            .HasColumnName("COMMENTID")
-            .HasColumnType("CHAR(36)")
             .IsRequired();
 
         builder.Property(c => c.TicketId)
-            .HasColumnName("TICKETID")
-            .HasColumnType("CHAR(36)")
             .IsRequired();
 
         builder.Property(c => c.Text)
-            .HasColumnName("TEXT")
-            .HasColumnType("CLOB")
             .IsRequired();
 
         builder.Property(c => c.CreatedAt)
-            .HasColumnName("CREATEDAT")
-            .HasColumnType("TIMESTAMP")
             .IsRequired();
 
         builder.Property(c => c.CreatedByUserId)
-            .HasColumnName("CREATEDBYUSERID")
-            .HasColumnType("VARCHAR2(450)")
+            .HasMaxLength(450)
             .IsRequired();
 
         // Relationships
@@ -49,7 +40,7 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
             .OnDelete(DeleteBehavior.Restrict);
 
         // Indexes
-        builder.HasIndex(c => c.TicketId).HasDatabaseName("IX_COMMENTS_TICKETID");
-        builder.HasIndex(c => c.CreatedAt).HasDatabaseName("IX_COMMENTS_CREATEDAT");
+        builder.HasIndex(c => c.TicketId);
+        builder.HasIndex(c => c.CreatedAt);
     }
 }

@@ -28,7 +28,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         builder.Entity<ApplicationUser>(entity =>
         {
             entity.Property(e => e.FullName).HasMaxLength(200);
-            entity.Property(e => e.CreatedAt).HasColumnType("TIMESTAMP");
         });
     }
 }

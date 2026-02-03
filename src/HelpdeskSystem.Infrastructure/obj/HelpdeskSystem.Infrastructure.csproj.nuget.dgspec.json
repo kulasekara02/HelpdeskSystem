@@ -206,6 +206,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -216,13 +220,9 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
-            "Oracle.EntityFrameworkCore": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.21.121, )"
-            },
-            "Oracle.ManagedDataAccess.Core": {
-              "target": "Package",
-              "version": "[3.21.130, )"
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
