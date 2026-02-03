@@ -1,6 +1,6 @@
 # Helpdesk Ticket System + Analytics Dashboard
 
-A comprehensive helpdesk solution built with .NET 8, Blazor Server, and Oracle 19c database using Clean Architecture.
+A comprehensive helpdesk solution built with .NET 8, Blazor Server, and SQLite database using Clean Architecture principles.
 
 ## Features
 
@@ -19,7 +19,7 @@ A comprehensive helpdesk solution built with .NET 8, Blazor Server, and Oracle 1
 - **Minimal Web API** - Clean API endpoints
 - **Entity Framework Core** - ORM for CRUD operations
 - **Dapper** - For optimized report queries
-- **Oracle 19c** - Database
+- **SQLite** - Lightweight embedded database
 - **ASP.NET Core Identity** - Authentication & Authorization
 - **Chart.js** - Dashboard visualizations
 - **Bootstrap 5** - UI styling
@@ -44,50 +44,32 @@ HelpdeskSystem/
 ## Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- Oracle 19c Database (or Oracle Cloud Free Tier)
-- Visual Studio 2022 / VS Code / Rider
+- Visual Studio 2022 / VS Code / Rider (optional)
+- No database installation required - SQLite is embedded!
 
 ## How to Run
 
-### Step 1: Clone or Download the Project
+### Step 1: Clone the Repository
 
 ```bash
-cd C:\Users\kule9\OneDrive\Desktop\HelpdeskSystem
+git clone https://github.com/kulasekara02/HelpdeskSystem.git
+cd HelpdeskSystem
 ```
 
-### Step 2: Configure Database Connection
-
-1. Open `src/HelpdeskSystem.Web/appsettings.json`
-2. Replace `[PUT_PASSWORD_HERE]` with your actual Oracle password
-
-**Recommended: Use User Secrets (for development)**
-
-```bash
-cd src/HelpdeskSystem.Web
-dotnet user-secrets init
-dotnet user-secrets set "ConnectionStrings:OracleConnection" "Data Source=db.freesql.com:1521/19c_fy05s;User Id=PATHIRANAGE02_SCHEMA_3O65G;Password=YOUR_ACTUAL_PASSWORD;"
-```
-
-### Step 3: Restore NuGet Packages
+### Step 2: Restore NuGet Packages
 
 ```bash
 dotnet restore
 ```
 
-### Step 4: Create Database Migrations
+### Step 3: Run the Application
 
 ```bash
 cd src/HelpdeskSystem.Web
-dotnet ef migrations add InitialCreate --project ../HelpdeskSystem.Infrastructure
+dotnet run
 ```
 
-### Step 5: Apply Migrations to Database
-
-```bash
-dotnet ef database update --project ../HelpdeskSystem.Infrastructure
-```
-
-### Step 6: Run the Application
+The database will be created automatically on first run!
 
 ```bash
 dotnet run
@@ -98,7 +80,7 @@ Or run with hot reload:
 dotnet watch run
 ```
 
-### Step 7: Access the Application
+### Step 4: Access the Application
 
 Open your browser and navigate to:
 - **HTTPS**: https://localhost:7001
@@ -135,23 +117,11 @@ Open your browser and navigate to:
 
 *Users can only view and edit their own tickets
 
-## Oracle SQL Scripts
+## Database
 
-### Create Tables Manually (Optional)
+The application uses SQLite as an embedded database. The database file (`helpdesk.db`) is created automatically in the `src/HelpdeskSystem.Web` directory on first run.
 
-If you prefer to create tables directly in Oracle:
-
-```bash
-sqlplus PATHIRANAGE02_SCHEMA_3O65G/password@db.freesql.com:1521/19c_fy05s @database/create_tables.sql
-```
-
-### Seed Data Manually (Optional)
-
-Note: The application seeds data automatically on first run. Use this only if you need to insert data directly:
-
-```bash
-sqlplus PATHIRANAGE02_SCHEMA_3O65G/password@db.freesql.com:1521/19c_fy05s @database/seed_data.sql
-```
+Migrations are already included and will be applied automatically.
 
 ## NuGet Packages
 
@@ -164,8 +134,7 @@ sqlplus PATHIRANAGE02_SCHEMA_3O65G/password@db.freesql.com:1521/19c_fy05s @datab
 - FluentValidation.DependencyInjectionExtensions (11.9.0)
 
 ### Infrastructure Layer
-- Oracle.EntityFrameworkCore (8.21.121)
-- Oracle.ManagedDataAccess.Core (23.4.0)
+- Microsoft.EntityFrameworkCore.Sqlite (8.0.0)
 - Microsoft.EntityFrameworkCore (8.0.0)
 - Microsoft.EntityFrameworkCore.Design (8.0.0)
 - Dapper (2.1.28)
@@ -209,48 +178,30 @@ sqlplus PATHIRANAGE02_SCHEMA_3O65G/password@db.freesql.com:1521/19c_fy05s @datab
 
 ## Troubleshooting
 
-### Oracle Connection Issues
+### Database Issues
 
-1. Verify your Oracle connection string format:
-   ```
-   Data Source=host:port/service_name;User Id=username;Password=password;
-   ```
-
-2. Check if Oracle client is installed or use managed driver (included)
-
-3. Test connection with SQL*Plus:
-   ```bash
-   sqlplus username/password@host:port/service_name
-   ```
-
-### EF Core Migration Issues
-
-If migrations fail, try:
+If you encounter database issues, delete the database file and restart:
 ```bash
-dotnet ef database drop --force --project ../HelpdeskSystem.Infrastructure
-dotnet ef migrations remove --project ../HelpdeskSystem.Infrastructure
-dotnet ef migrations add InitialCreate --project ../HelpdeskSystem.Infrastructure
+rm src/HelpdeskSystem.Web/helpdesk.db*
+dotnet run
+```
+
+### Reset Database
+
+To start with a fresh database:
+```bash
+cd src/HelpdeskSystem.Web
+rm helpdesk.db*
 dotnet ef database update --project ../HelpdeskSystem.Infrastructure
 ```
 
-### Reset Seed Data
+## Screenshots
 
-Delete all data and re-seed:
-```sql
-DELETE FROM STATUSHISTORY;
-DELETE FROM COMMENTS;
-DELETE FROM TICKETS;
--- Restart the application to re-seed
-```
+_Add screenshots of your application here_
 
-## Environment Variables
+## Contributing
 
-For production, set these environment variables:
-
-```bash
-ASPNETCORE_ENVIRONMENT=Production
-ConnectionStrings__OracleConnection=your_production_connection_string
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Logs
 
@@ -264,4 +215,10 @@ MIT License - Feel free to use this project for learning and development.
 
 ## Credits
 
-Built with .NET 8 and Oracle 19c for demonstrating Clean Architecture patterns.
+Built with .NET 8 and SQLite for demonstrating Clean Architecture patterns in a modern web application.
+
+## Author
+
+**kulasekara02**
+- GitHub: [@kulasekara02](https://github.com/kulasekara02)
+- Repository: [HelpdeskSystem](https://github.com/kulasekara02/HelpdeskSystem)
